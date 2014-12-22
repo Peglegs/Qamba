@@ -7,7 +7,7 @@ Mark-->Oauth spotify on mongologin base (upload tonight)
 
 Cooper-->ability to add uploads to spotify playlists and offline playlists(? not connected to spotify) + Voting alg. + guitar tabs 
 
-Andreas-->storing uploads in DB and possible voting alg. 
+Andreas-->storing uploads in DB and possible voting alg. MERGE MASTER
 
 Eric-->Templates + Make pretty
 
