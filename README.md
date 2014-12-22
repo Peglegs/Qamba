@@ -20,5 +20,3 @@ Timeline:
   * Adding to spotify playlist. (Cooper)
 
   * Uploads What genre's to have. Format of uploads. How to interface? (search bar etc. General interface: Individual song pages? Band Pages?) (Eric)
-
-this is a branch
