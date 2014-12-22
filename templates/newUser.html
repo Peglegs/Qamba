@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+  </head>
+  <body>
+    <h2>Made a mistake? Go back.</h2>
+    <a class="pure-button pure-button-primary"href="/login">Back</a>
+    <h1>Sign up below</h1>
+    <br>
+
+     {% if error %}
+    <h2>{{error}}</h2>
+    {% endif %}
+
+     <form method="POST", class="pure-form pure-form-stacked">
+       <fieldset>
+        <label for="username">Username</label>
+        <input id="username" type="text" placeholder="Username" name="username">
+        <label for="password">Password</label>
+        <input id="password" type="password" placeholder="Password" name="password">
+        <button type="submit" class="pure-button pure-button-primary" name = "create">Create account</button>
+      </fieldset>
+     </form>
+    </body>
+</html>
+
