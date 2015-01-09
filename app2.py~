@@ -1,9 +1,0 @@
-from flask import Flask,render_template,request,redirect, session
-from pymongo import Connection
-import utils
-
-app=Flask(__name__)
-if __name__=="__main__":
-    app.secret_key="GetBetterGeButter"
-    app.debug=True
-    app.run();
