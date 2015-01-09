@@ -5,10 +5,14 @@ import sqlite3
 import csv
 from time import strftime, gmtime, localtime, time
 def upload(title,author,link):
-     conn = sqlite3.connect("database.db")
+    conn = sqlite3.connect("database.db")
     c = conn.cursor()
     insertion = (time(), title, author, link, 0, 0, 0)
     c.execute("INSERT INTO uploads VALUES (?,?,?,?,?,?,?)", insertion)
     conn.commit()
     conn.close()
     
+def generatelink(link):
+    pass
+def store_song(link, song_file):
+    song_file.save(os.path.join("/songs/", link))

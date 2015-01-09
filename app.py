@@ -1,6 +1,7 @@
 from flask import Flask,render_template,request,redirect, session
 from pymongo import Connection
 import utils
+import uploadmanager
 
 app=Flask(__name__)
 
@@ -92,6 +93,24 @@ def p2():
         return render_template("p2.html")
     except:
         return redirect("/")
+@app.route("/upload", methods=["GET","POST"])
+def upload():
+    if 'name' not in session:
+        return redirect("/")
+    else:
+        if request.method == "GET":
+            return render_template("upload.html")
+        else:
+            try:
+                author = session["name"]
+                title = request.form['title']
+                song_file = request.form['file']
+                link = generate_link(title)
+                store_song(link, song_file)
+                upload(title, author, link)
+                return render_template("upload_success.html")
+            except:
+                return render_template("upload_failure.html")
 
 if __name__=="__main__":
     app.secret_key="GetBetterGeButter"
