@@ -35,7 +35,7 @@ def login():
         elif valid_user is True:
             SessionCounter()
             session['name'] = uname
-            return redirect("/welcome")
+            return redirect("/")
 
 
 
@@ -53,7 +53,7 @@ def newUser():
         if create is True:
             SessionCounter()
             session['name'] = uname
-            return render_template("welcome.html", error=error)
+            return redirect("/")
         else:
             error = "Sorry, the username you have selected already exists or you didn't enter a password."
             return render_template("newUser.html", error=error)
