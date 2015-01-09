@@ -1,0 +1,9 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>Your entry does not exist.</h1>
+    <h2> New User and want to sign up? Do so below.</h2>
+
+    <button type="button">Login</button>
+    
