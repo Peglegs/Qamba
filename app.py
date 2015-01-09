@@ -93,7 +93,6 @@ def p2():
     except:
         return redirect("/")
 
-
 if __name__=="__main__":
     app.secret_key="GetBetterGeButter"
     app.debug=True
