@@ -1,5 +1,6 @@
 body {
-color: #777;
+    color: #348017;
+    background: #D1D0CE;
 }
 .pure-img-responsive {
 max-width: 100%;
@@ -47,7 +48,7 @@ line-height: 1.6em;
 }
 .header {
 margin: 0;
-color: #333;
+color: #348017;
 text-align: center;
 padding: 2.5em 2em 0;
 border-bottom: 1px solid #eee;
@@ -59,7 +60,6 @@ font-weight: 300;
 }
 .header h2 {
 font-weight: 300;
-color: #ccc;
 padding: 0;
 margin-top: 0;
 }
@@ -88,7 +88,7 @@ overflow-y: auto;
 All anchors inside the menu should be styled like this.
 */
 #menu a {
-color: #999;
+color: #348017;
 border: none;
 padding: 0.6em 0 0.6em 0.6em;
 }
@@ -132,7 +132,7 @@ This styles the menu heading.
 */
 #menu .pure-menu-heading {
 font-size: 110%;
-color: #fff;
+color: #254117;
 margin: 0;
 }
 /* -- Dynamic Button For Responsive Menu -------------------------------------*/
