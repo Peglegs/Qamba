@@ -1,14 +1,9 @@
 from flask import Flask,render_template,request,redirect, session
 from pymongo import Connection
 import utils
+from uploadmanager import *
 
 app=Flask(__name__)
-
-def SessionCounter():
-  try:
-    session['counter'] += 1
-  except KeyError:
-    session['counter'] = 1
 
 @app.route("/")
 def home():
@@ -30,10 +25,9 @@ def login():
         if button=="newUser":
             return redirect('/newUser')
         elif valid_user is False:
-            error= "Did not match our records. Please try again or create a new account"
+            error= "Invalid Username or Password. Please try again or create a new account"
             return render_template("login.html",error=error)
         elif valid_user is True:
-            SessionCounter()
             session['name'] = uname
             return redirect("/")
 
@@ -51,8 +45,8 @@ def newUser():
         create = utils.newUser(uname,pword)
         error=None
         if create is True:
-            SessionCounter()
             session['name'] = uname
+            session['artist'] = False
             return redirect("/")
         else:
             error = "Sorry, the username you have selected already exists or you didn't enter a password."
@@ -73,29 +67,42 @@ def logout():
     session.clear()
     return redirect("/")
 
-@app.route("/welcome/p1")
-def p1():
-    
-    try:
-        session['name']
-        session['counter'] = session['counter'] + 1
-        return render_template("p1.html")
-    except:
+
+
+@app.route("/upload", methods=["GET","POST"])
+def upload():
+    if 'name' not in session:
         return redirect("/")
-    
-    
-@app.route("/welcome/p2")
-def p2():
-    try:
-        session['counter'] = session['counter'] + 1
-        session['name']
-        return render_template("p2.html")
-    except:
-        return redirect("/")
+    else:
+        if request.method == "GET":
+            return render_template("upload.html")
+        else:
+            try:
+                author = session["name"]
+                title = request.form['title']
+                song_file = request.files['file']
+                link = generate_link(title, author)
+                store_song(link, song_file)
+                upload_song(title, author, link)
+                return render_template("upload_success.html")
+            except:
+                return render_template("upload_failure.html")
+
+
+@app.route("/ArtistPage")
+def ArtistPage():
+    url = request.url
+    url = url.split("artist=")
+    artist = url[1]
+    music = find_artist(artist)
+    if music == None:
+        error = "Artist not found"
+        return render_template("ArtistPage.html", error = error)
+    return render_template("ArtistPage.html", music=music)
+
+
 
 if __name__=="__main__":
-    app.secret_key="GetBetterGeButter"
+    app.secret_key="GetBetterGetButter"
     app.debug=True
     app.run();
-    
-     

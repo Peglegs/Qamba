@@ -34,6 +34,7 @@ def newAuth(uname,pword):
 #lazy copy and paste solutions for the win!
 def authenticate(uname,pword):
     return newAuth(uname,pword)
+
 # method for testing purposes     
 def newUser(uname):
     name = ['Mark', 'Sue', 'Sally', 'Sam']
@@ -53,6 +54,17 @@ def newUser(uname,pword):
 	#db.testbase.drop()
 	db.testbase.insert({'user':uname, 'pw':pword})
 	return True
+
+def find_artist(artist):
+    conn=Connection()
+    db=conn["mydb"]
+    res = db.testbase.find()
+    for r in res:
+        if r['user'] == artist:
+            if r['artist'] == True:
+                return r
+    return None
+
 
 #print newUser("moo","oinker")
 #print authenticate("moo","oinker")
