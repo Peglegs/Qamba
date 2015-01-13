@@ -41,10 +41,6 @@ def welcome():
     return render_template("welcome.html", UserToken = UserToken)
 
 
-@app.route("/Artist")
-def welcome(artist):
-    
-
 
 
 if __name__=="__main__":
