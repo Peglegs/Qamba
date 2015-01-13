@@ -26,11 +26,10 @@
       <div class="pure-u-11-12">
 
 
+{{UserToken}}
 
-<iframe src="https://embed.spotify.com/?uri=spotify:trackset:PREFEREDTITLE:5Z7ygHQo02SUrFmcgpwsKW,1x6ACsKV4UdWS2FMuPFUiT,4bi73jCM02fMpkI11Lqmfe" frameborder="0" allowtransparency="true"></iframe>   
-'
-'
-
+<iframe src="https://embed.spotify.com/?uri=spotify:track:4th1RQAelzqgY7wL53UGQt" width="250" height="80" frameborder="0" allowtransparency="true"></iframe>
+   
 
     <p>Username: {{session['name']}}<p>
     <p>You have visited {{session['counter']}} times</p>
