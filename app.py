@@ -1,7 +1,7 @@
 from flask import Flask,render_template,request,redirect, session
 from pymongo import Connection
 import utils
-import uploadmanager
+from uploadmanager import *
 
 app=Flask(__name__)
 
@@ -104,10 +104,10 @@ def upload():
             try:
                 author = session["name"]
                 title = request.form['title']
-                song_file = request.form['file']
-                link = generate_link(title)
+                song_file = request.files['file']
+                link = generate_link(title, author)
                 store_song(link, song_file)
-                upload(title, author, link)
+                upload_song(title, author, link)
                 return render_template("upload_success.html")
             except:
                 return render_template("upload_failure.html")
