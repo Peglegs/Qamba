@@ -39,7 +39,13 @@ def welcome():
         UserToken = get_token(code)
     sec = UserToken['expires_in']
     return render_template("welcome.html", UserToken = UserToken)
-  
+
+
+@app.route("/Artist")
+def welcome(artist):
+    
+
+
 
 if __name__=="__main__":
     app.secret_key="GetBetterGetButter"
