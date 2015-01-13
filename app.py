@@ -29,7 +29,7 @@ def login():
             return render_template("login.html",error=error)
         elif valid_user is True:
             session['name'] = uname
-            return redirect("/welcome")
+            return redirect("/")
 
 
 
@@ -47,7 +47,7 @@ def newUser():
         if create is True:
             session['name'] = uname
             session['artist'] = False
-            return render_template("welcome.html", error=error)
+            return redirect("/")
         else:
             error = "Sorry, the username you have selected already exists or you didn't enter a password."
             return render_template("newUser.html", error=error)
@@ -67,26 +67,8 @@ def logout():
     session.clear()
     return redirect("/")
 
-<<<<<<< HEAD
-@app.route("/welcome/p1")
-def p1():
-    
-    try:
-        session['name']
-        session['counter'] = session['counter'] + 1
-        return render_template("p1.html")
-    except:
-        return redirect("/")
-    
-    
-@app.route("/welcome/p2")
-def p2():
-    try:
-        session['counter'] = session['counter'] + 1
-        session['name']
-        return render_template("p2.html")
-    except:
-        return redirect("/")
+
+
 @app.route("/upload", methods=["GET","POST"])
 def upload():
     if 'name' not in session:
@@ -106,6 +88,7 @@ def upload():
             except:
                 return render_template("upload_failure.html")
 
+
 @app.route("/ArtistPage")
 def ArtistPage():
     url = request.url
@@ -123,5 +106,3 @@ if __name__=="__main__":
     app.secret_key="GetBetterGetButter"
     app.debug=True
     app.run();
-    
-     
