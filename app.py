@@ -5,12 +5,6 @@ from uploadmanager import *
 
 app=Flask(__name__)
 
-def SessionCounter():
-  try:
-    session['counter'] += 1
-  except KeyError:
-    session['counter'] = 1
-
 @app.route("/")
 def home():
     return render_template("home.html")
@@ -31,10 +25,9 @@ def login():
         if button=="newUser":
             return redirect('/newUser')
         elif valid_user is False:
-            error= "Did not match our records. Please try again or create a new account"
+            error= "Invalid Username or Password. Please try again or create a new account"
             return render_template("login.html",error=error)
         elif valid_user is True:
-            SessionCounter()
             session['name'] = uname
             return redirect("/welcome")
 
@@ -52,8 +45,8 @@ def newUser():
         create = utils.newUser(uname,pword)
         error=None
         if create is True:
-            SessionCounter()
             session['name'] = uname
+            session['artist'] = False
             return render_template("welcome.html", error=error)
         else:
             error = "Sorry, the username you have selected already exists or you didn't enter a password."
@@ -74,6 +67,7 @@ def logout():
     session.clear()
     return redirect("/")
 
+<<<<<<< HEAD
 @app.route("/welcome/p1")
 def p1():
     
@@ -112,8 +106,21 @@ def upload():
             except:
                 return render_template("upload_failure.html")
 
+@app.route("/ArtistPage")
+def ArtistPage():
+    url = request.url
+    url = url.split("artist=")
+    artist = url[1]
+    music = find_artist(artist)
+    if music == None:
+        error = "Artist not found"
+        return render_template("ArtistPage.html", error = error)
+    return render_template("ArtistPage.html", music=music)
+
+
+
 if __name__=="__main__":
-    app.secret_key="GetBetterGeButter"
+    app.secret_key="GetBetterGetButter"
     app.debug=True
     app.run();
     
