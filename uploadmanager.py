@@ -1,6 +1,6 @@
-'''Databases: uploads, popular
-Both have tables in the order of: (date text, title text, author text, link text, genre text, views integer, likes integer, dislikes integer)
-'''
+#Databases: uploads, popular
+#Both have tables in the order of: (date text, title text, author text, link text, genre text, views integer, likes integer, dislikes integer)
+
 import sqlite3
 import csv
 import os
@@ -29,3 +29,14 @@ def wipe_tables():
     conn.commit()
     conn.close()
     print "Done"
+# Returns a dictionary with two keys
+# uploads: a list of all songs in the genre in the uploads database
+# popular: a list of all songs in the genre in the popular database
+
+def get_by_genre(genre):
+    conn = sqlite3.connect("songs.db")
+    c = conn.cursor()
+    ret = {}
+    ret['uploads'] = c.execute("SELECT * FROM uploads WHERE genre=?", genre)
+    ret['popular'] = c.execute("SELECT * FROM popular WHERE genre=?", genre)
+    return ret
