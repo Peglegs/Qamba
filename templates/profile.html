@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block bodycontent %}
+
+Hey {{user}},
+<br>
+Artist Status: {% if artist %} You have {{space}}mb left to upload songs. 
+{% else %} You are not an artist {% endif %}
+<br>
+
+
+
+{% endblock bodycontent %}
