@@ -7,10 +7,15 @@ app=Flask(__name__)
 
 @app.route("/")
 def home():
+    loggedin = False
+    if "name" in session:
+        return render_template("home2.html")
     return render_template("home.html")
 
 @app.route("/login", methods=["GET","POST"])
 def login():
+    if "name" in session:
+        return redirect("/")
     if request.method=="GET":
         return render_template("login.html")
     else:
@@ -36,6 +41,8 @@ def login():
 
 @app.route("/newUser", methods=["GET", "POST"])
 def newUser():
+    if "name" in session:
+        return redirect("/")
     if request.method=="GET":
         return render_template("newUser.html")
     else:
