@@ -77,16 +77,16 @@ def upload():
         if request.method == "GET":
             return render_template("upload.html")
         else:
-            try:
-                author = session["name"]
-                title = request.form['title']
-                song_file = request.files['file']
-                link = generate_link(title, author)
-                store_song(link, song_file)
-                upload_song(title, author, link)
-                return render_template("upload_success.html")
-            except:
-                return render_template("upload_failure.html")
+            author = session["name"]
+            title = request.form['title']
+            song_file = request.files['file']
+            genre = request.form['genre']
+            link = generate_link(title, author)
+            store_song(link, song_file)
+            upload_song(title, author, link, genre)
+            return render_template("upload_success.html")
+            #except:
+            #    return render_template("upload_failure.html")
 
 
 @app.route("/ArtistPage")
