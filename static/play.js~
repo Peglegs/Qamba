@@ -1,0 +1,11 @@
+$(document).ready(function(){
+    $("#play").click(function(){
+	whatsIn = $("#play").text()
+	if (whatsIn == "&#9654;"){
+	    $("#play").replaceWith("<div id='pause'>&#9616;&nbsp;&#9612;<div>")
+	}
+	else{
+	    $("#play").replaceWith("<div id='pause'>&#9654;;<div>")
+	}
+    });
+});
