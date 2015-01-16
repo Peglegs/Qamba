@@ -1,6 +1,6 @@
 from flask import Flask,render_template,request,redirect, session
 from pymongo import Connection
-import utils
+from utils import *
 from uploadmanager import *
 
 app=Flask(__name__)
@@ -32,6 +32,9 @@ def login():
             return redirect("/")
 
 
+@app.route("/about")
+def about():
+    return render_template("about.html")
 
 
 @app.route("/newUser", methods=["GET", "POST"])
@@ -46,7 +49,6 @@ def newUser():
         error=None
         if create is True:
             session['name'] = uname
-            session['artist'] = False
             return redirect("/")
         else:
             error = "Sorry, the username you have selected already exists or you didn't enter a password."
@@ -61,6 +63,17 @@ def welcome():
     except:
         return redirect("/")
  
+@app.route("/profile")
+def profile():
+    if 'name' not in session:
+        return redirect("/")
+    else:
+        user = session['name']
+        links = find_links(user)
+        artist = is_artist(user)
+        likes = get_likes(user)
+        return render_template("profile.html", user=user, links=links, artist=artist, likes = likes)
+
 
 @app.route("/logout", methods=["GET", "POST"])
 def logout():
@@ -84,9 +97,13 @@ def upload():
                 link = generate_link(title, author)
                 store_song(link, song_file)
                 upload_song(title, author, link)
+                sessio
                 return render_template("upload_success.html")
             except:
                 return render_template("upload_failure.html")
+
+
+
 
 
 @app.route("/ArtistPage")
@@ -94,11 +111,11 @@ def ArtistPage():
     url = request.url
     url = url.split("artist=")
     artist = url[1]
-    music = find_artist(artist)
+    music = find_links(artist)
     if music == None:
         error = "Artist not found"
         return render_template("ArtistPage.html", error = error)
-    return render_template("ArtistPage.html", music=music)
+    return render_template("ArtistPage.html", artist = artist, music=music)
 
 
 
