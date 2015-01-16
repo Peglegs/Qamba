@@ -39,4 +39,18 @@ def get_by_genre(genre):
     ret = {}
     ret['uploads'] = c.execute("SELECT * FROM uploads WHERE genre=?", genre)
     ret['popular'] = c.execute("SELECT * FROM popular WHERE genre=?", genre)
+    conn.close()
     return ret
+
+def increment_view(title, author):
+    conn = sqlite3.connect("songs.db")
+    c = conn.cursor()
+    values = (title, author)
+    c.execute("SELECT views from uploads WHERE title=? AND author=?", values)
+    num =  c.fetchone()[0] + 1
+    print num
+    change = (num,title, author)
+    c.execute("UPDATE TABLE uploads SET views=? WHERE title=? AND author=?", change)
+    c.execute("SELECT views from popular WHERE title=? AND author=?", values)
+    conn.commit()
+    conn.close()
