@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+<html>
+     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+     <img src="/static/thluffy.png">
+     <link rel="stylesheet" href="/static/side-menu.css" type="text/css" media="screen">
+
+     {% block bodycontent %}
+    <h1>This is the normal uncool website.  You can enter the super secret website by either signing up or logging in!</h1>
+    <a class="pure-button pure-button-primary"href="/login">Login</a>
+    <a class="pure-button pure-button-primary"href="/newUser">newUser</a>
+    {% endblock bodycontent %}
+</html>

@@ -1,3 +1,5 @@
+
+{% extends "base.html" %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -5,17 +7,25 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
  
    </head>
+{% block bodycontent %}
 <body>
+
+       
+	<div class="content">
 	<input id="audio_file" type="file" accept="audio/*" />
 	<audio controls="controls" id="audio_player" type="audio/mpeg">	
+	<h1>WHATS GOING ON HERE</h1>
   	<script>
 	audio_file.onchange = function(){
     		var files = this.files;
     		var file = URL.createObjectURL(files[0]); 
+			console.log(file)
    			audio_player.src = file; 
    	 	audio_player.play();
 	};
 	</script>
+	</div>
 </body>
-
+{% endblock bodycontent %}
 </html>
+

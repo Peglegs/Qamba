@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+<html>
+  <head>
+   <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+  </head>
+
+  {% block bodycontent %}
+  <center>
+    <h1>Login</h1>
+
+    {% if error  %}
+    <h2>{{error}}</h2>
+    {% endif %}
+    <form method="POST",  class="pure-form">
+      <fieldset>
+      <input type="text" name="uname" placeholder="Username">
+      <input type="password" name="pword" placeholder="Password">
+          <p>
+	<input type="submit" name="b" value="login" class="pure-button pure-button-primary">
+	<input type="submit" name="b" value="clear" class="pure-button pure-button-primary">
+	<br>
+	<h1>New user? Click Below</h1>
+	<input type="submit" name="b" value="newUser"  class="pure-button pure-button-primary">
+	</fieldset>
+    </form>
+    </center>
+
+ 
+    
+
+  {% endblock bodycontent %}
+</html>
