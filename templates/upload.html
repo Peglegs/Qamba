@@ -1,11 +1,24 @@
 {% extends "base.html" %}
+<<<<<<< HEAD
 <html>
 {% block bodycontent %}
+=======
+
+{% block bodycontent %}
+<body>
+>>>>>>> 5fa92de3f932adbbd1a49d2dbe6822c862b1cedb
 Upload your songs here! <br> <br>
 <form method="POST" enctype="multipart/form-data" > 
 Title: <input type="text" name="title" > <br>
+ <!-- Change this to a dropdown menu  -->
+Genre: <input type="text" name="genre"> <br>
 File: <input type="file" name="file" accept="audio/*"> <br>
 <input type="submit" value="Upload">
 </form>
+<<<<<<< HEAD
 {% endblock bodycontent %}
 </html>
+=======
+</body>
+{% endblock bodycontent %}
+>>>>>>> 5fa92de3f932adbbd1a49d2dbe6822c862b1cedb
