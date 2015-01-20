@@ -72,15 +72,6 @@ def is_artist(artist):
             return r['artist']
 
 
-def add_like(user, link):
-    conn=Connection()
-    db=conn["mydb"]
-    res = db.testbase.find()
-    for r in res:
-        if r['user'] == user:
-            r['likes'].append(link)
-
-
 def get_likes(user):
     conn=Connection()
     db=conn["mydb"]

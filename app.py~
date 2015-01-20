@@ -109,7 +109,7 @@ def genre():
     url = url.split("artist=")
     genre = url[1]
     songs = get_by_genre(genre)
-    return render_templare("genres.html", genre=genre, songs=songs)
+    return genre(songs)
 
 @app.route("/ArtistPage")
 def ArtistPage():
