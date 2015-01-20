@@ -1,8 +1,11 @@
-<body>
+{% extends "base.html" %}
+<html>
+{% block bodycontent %}
 Upload your songs here! <br> <br>
 <form method="POST" enctype="multipart/form-data" > 
 Title: <input type="text" name="title" > <br>
 File: <input type="file" name="file" accept="audio/*"> <br>
 <input type="submit" value="Upload">
 </form>
-</body>
+{% endblock bodycontent %}
+</html>
