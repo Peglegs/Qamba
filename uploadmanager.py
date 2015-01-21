@@ -4,7 +4,9 @@
 import sqlite3
 import csv
 import os
+import utils
 from time import strftime, gmtime, localtime, time
+
 def upload_song(title,author,link,genre):
     conn = sqlite3.connect("songs.db")
     c = conn.cursor()
@@ -19,8 +21,12 @@ def generate_link(title, author):
         os.makedirs(author)
     os.chdir("..")
     return "./songs/" + author + "/" + title
+
+
 def store_song(link, song_file):
     song_file.save(link)
+
+
 def wipe_tables():
     conn = sqlite3.connect("songs.db")
     c = conn.cursor()
