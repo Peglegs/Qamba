@@ -6,7 +6,7 @@ import csv
 import os
 import utils
 from time import strftime, gmtime, localtime, time
-
+global genres = ["Rap", "Rock", "EDM", "Country", "Alternative", "Pop", "Classical", "Metal"]
 def upload_song(title,author,link,genre):
     conn = sqlite3.connect("songs.db")
     c = conn.cursor()
@@ -91,5 +91,20 @@ def increment_likes(title, author):
         changed = True
     except:
         pass
+    conn.commit()
+    conn.close()
+
+def is_acceptable(views, likes):
+    return True
+
+def assess_uploads():
+    conn = sqlite3.connect("songs.db")
+    c = conn.cursor()
+    adding = []
+    for row in c.execute("SELECT * FROM uploads"):
+        if is_acceptable(row[5], row[6]):
+            adding.append(row)
+    c.executemany("INSERT into popular VALUES (?,?,?,?,?,?,?,?)", adding)
+    c.execute("DELETE FROM uploads")
     conn.commit()
     conn.close()
