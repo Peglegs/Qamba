@@ -110,8 +110,13 @@ def upload():
                 return render_template("upload_failure.html")
 
 
-
-
+@app.route("/genres")
+def genre():
+    url = request.url
+    url = url.split("genre=")
+    genre = url[1]
+    songs = get_by_genre(genre)
+    return render_templare("genres.html", genre=genre, songs=songs)
 
 @app.route("/ArtistPage")
 def ArtistPage():
