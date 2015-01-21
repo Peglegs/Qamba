@@ -3,29 +3,31 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
- 
+{% block headcontent %}
+    <link rel="stylesheet" href="/static/main.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="static/speakker.css"  type="text/css" media="screen">
+    <link rel="stylesheet" href="static/mspeakker.css" type="text/css" media="screen">
+    <script type="text/javascript" src="static/jquery.min.js"></script>
+    <script type="text/javascript" src="static/projekktor.min.js"></script>
+    <script type="text/javascript" src="speakker.min.js"></script>
+    <script type="text/javascript" src="/static/main.js"></script>
+
+{% endblock headcontent %}
    </head>
 
 <body>
        
 
 {% block bodycontent %}
-	<input id="audio_file" type="file" accept="audio/*" />
-	<audio controls="controls" id="audio_player" type="audio/mpeg">	
-	<h1>WHATS GOING ON HERE</h1>
+       <div class="example">
+        <h2>Mini player example (for single file)</h2>
+        <div class="small_player"></div>
+     </div>
 
+
+
+ 
 {% endblock bodycontent %}
-  	<script>
-	audio_file.onchange = function(){
-    		var files = this.files;
-    		var file = URL.createObjectURL(files[0]); 
-			console.log(file)
-   			audio_player.src = file; 
-   	 	audio_player.play();
-	};
-	</script>
 </body>
 
 </html>
