@@ -106,7 +106,7 @@ def upload():
 @app.route("/genres")
 def genre():
     url = request.url
-    url = url.split("artist=")
+    url = url.split("genre=")
     genre = url[1]
     songs = get_by_genre(genre)
     return render_templare("genres.html", genre=genre, songs=songs)
