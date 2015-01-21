@@ -46,3 +46,51 @@ def get_by_genre(genre):
     ret['uploads'] = c.execute("SELECT * FROM uploads WHERE genre=?", genre)
     ret['popular'] = c.execute("SELECT * FROM popular WHERE genre=?", genre)
     return ret
+
+def increment_views(title, author):
+    conn = sqlite3.connect("songs.db")
+    c = conn.cursor()
+    values = (title, author)
+    changed = False
+    try:
+        c.execute("SELECT views from uploads WHERE title=? AND author=?", values)
+        num =  c.fetchone()[0] + 1
+        change = (num,title, author)
+        c.execute("UPDATE uploads SET views = ? WHERE title=? AND author=?", change)
+        changed = True
+    except:
+        pass
+    try:
+        c.execute("SELECT views from popular WHERE title=? AND author=?", values)
+        num = c.fetchone()[0] + 1
+        change = (num, title, author)
+        c.execute("UPDATE popular SET views = ? WHERE title=? AND author=?", change)
+        changed = True
+    except:
+        pass
+    conn.commit()
+    conn.close()
+
+def increment_likes(title, author):
+    conn = sqlite3.connect("songs.db")
+    c = conn.cursor()
+    values = (title, author)
+    try:
+        c.execute("SELECT likes from uploads WHERE title=? AND author=?", values)
+        num =  c.fetchone()[0] + 1
+        change = (num,title, author)
+        c.execute("UPDATE uploads SET likes = ? WHERE title=? AND author=?", change)
+        changed = True
+    except:
+        pass
+    try:
+        c.execute("SELECT likes from popular WHERE title=? AND author=?", values)
+        num = c.fetchone()[0] + 1
+        change = (num, title, author)
+        c.execute("UPDATE popular SET likes = ? WHERE title=? AND author=?", change)
+        changed = True
+    except:
+        pass
+    conn.commit()
+    conn.close()
+
