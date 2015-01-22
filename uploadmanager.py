@@ -6,7 +6,7 @@ import csv
 import os
 import utils
 from time import strftime, gmtime, localtime, time
-global genres = ["Rap", "Rock", "EDM", "Country", "Alternative", "Pop", "Classical", "Metal"]
+genres = ["Rap", "Rock", "EDM", "Country", "Alternative", "Pop", "Classical", "Metal"]
 def upload_song(title,author,link,genre):
     conn = sqlite3.connect("songs.db")
     c = conn.cursor()
@@ -99,9 +99,11 @@ def assess_uploads():
     conn = sqlite3.connect("songs.db")
     c = conn.cursor()
     adding = []
+    global genres
     for genre in genres:
+        insertion = (genre,)
         to_add = (-1,-1,-1,-1,-1,-1,-1,-1)
-        for row in c.execute("SELECT * FROM uploads WITH genre=?", (genre,)):
+        for row in c.execute("SELECT * FROM uploads WHERE genre=?", insertion):
             if to_add[6] < row[6]:
                 to_add = row
             elif to_add[6] == row[6] and to_add[5] < row [5]:
@@ -114,9 +116,13 @@ def assess_uploads():
     conn.close()
 
 assess_uploads()
-    conn = sqlite3.connect("songs.db")
-    c = conn.cursor()
-    print "popular:"
-    for row in c.execute("SELECT * FROM popular"):
-        print row
-    conn.close()
+conn = sqlite3.connect("songs.db")
+c = conn.cursor()
+print "popular:"
+for row in c.execute("SELECT * FROM popular"):
+    print row
+print "uploads"
+for row in c.execute("SELECT * FROM uploads"):
+    print row
+
+conn.close()
