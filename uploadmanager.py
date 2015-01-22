@@ -4,7 +4,9 @@
 import sqlite3
 import csv
 import os
+import utils
 from time import strftime, gmtime, localtime, time
+global genres = ["Rap", "Rock", "EDM", "Country", "Alternative", "Pop", "Classical", "Metal"]
 def upload_song(title,author,link,genre):
     conn = sqlite3.connect("songs.db")
     c = conn.cursor()
@@ -19,8 +21,12 @@ def generate_link(title, author):
         os.makedirs(author)
     os.chdir("..")
     return "./songs/" + author + "/" + title
+
+
 def store_song(link, song_file):
     song_file.save(link)
+
+
 def wipe_tables():
     conn = sqlite3.connect("songs.db")
     c = conn.cursor()
@@ -89,10 +95,28 @@ def increment_likes(title, author):
     conn.commit()
     conn.close()
 
+def assess_uploads():
+    conn = sqlite3.connect("songs.db")
+    c = conn.cursor()
+    adding = []
+    for genre in genres:
+        to_add = (-1,-1,-1,-1,-1,-1,-1,-1)
+        for row in c.execute("SELECT * FROM uploads WITH genre=?", (genre,)):
+            if to_add[6] < row[6]:
+                to_add = row
+            elif to_add[6] == row[6] and to_add[5] < row [5]:
+                to_add = row
+        if to_add[5] != -1:
+            adding.append(to_add)
+    c.executemany("INSERT into popular VALUES (?,?,?,?,?,?,?,?)", adding)
+    c.execute("DELETE FROM uploads")
+    conn.commit()
+    conn.close()
 
-conn = sqlite3.connect("songs.db")
-c = conn.cursor()
-increment_likes("D2B","Paul")
-c.execute("SELECT * FROM uploads")
-print c.fetchone()
-conn.close()
+assess_uploads()
+    conn = sqlite3.connect("songs.db")
+    c = conn.cursor()
+    print "popular:"
+    for row in c.execute("SELECT * FROM popular"):
+        print row
+    conn.close()
