@@ -111,5 +111,7 @@ def assess_uploads():
             adding.append(to_add)
     c.executemany("INSERT into popular VALUES (?,?,?,?,?,?,?,?)", adding)
     c.execute("DELETE FROM uploads")
+    for thing in adding:
+        make_artist(thing[2])
     conn.commit()
     conn.close()
