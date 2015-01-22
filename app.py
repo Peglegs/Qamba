@@ -113,15 +113,20 @@ def upload():
 @app.route("/genres")
 def genre():
     url = request.url
-    url = url.split("genre=")
+    url = url.split("?")
     genre = url[1]
     songs = get_by_genre(genre)
     return render_templare("genres.html", genre=genre, songs=songs)
 
-@app.route("/ArtistPage")
+@app.route("/artists")
+def artists():
+    artists = get_artists()
+    return render_template("artists.html", artists=artists)
+    
+@app.route("/artistpage")
 def ArtistPage():
     url = request.url
-    url = url.split("artist=")
+    url = url.split("?")
     artist = url[1]
     music = find_links(artist)
     if music == None:

@@ -62,7 +62,26 @@ def add_link(artist,link):
             r['links'].append(link)
             return True
     return False
-                
+
+def make_artist(user):
+     conn=Connection()
+    db=conn["mydb"]
+    res = db.testbase.find()
+    for r in res:
+        if r['user'] == user:
+            r['artist'] = True
+
+
+def get_artists():
+    answer = []
+    conn=Connection()
+    db=conn["mydb"]
+    res = db.testbase.find()
+    for r in res:
+        if r['artist'] == True:
+                answer.append(r)
+    return answer
+
 def is_artist(artist):
     conn=Connection()
     db=conn["mydb"]
