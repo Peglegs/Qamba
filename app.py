@@ -9,8 +9,8 @@ app=Flask(__name__)
 def home():
     loggedin = False
     if "name" in session:
-        return render_template("home2.html")
-    return render_template("home.html")
+        return redirect("/profile")
+    return redirect("/login")
 
 @app.route("/login", methods=["GET","POST"])
 def login():
