@@ -7,10 +7,15 @@ app=Flask(__name__)
 
 @app.route("/")
 def home():
+    loggedin = False
+    if "name" in session:
+        return render_template("home2.html")
     return render_template("home.html")
 
 @app.route("/login", methods=["GET","POST"])
 def login():
+    if "name" in session:
+        return redirect("/")
     if request.method=="GET":
         return render_template("login.html")
     else:
@@ -39,6 +44,8 @@ def about():
 
 @app.route("/newUser", methods=["GET", "POST"])
 def newUser():
+    if "name" in session:
+        return redirect("/")
     if request.method=="GET":
         return render_template("newUser.html")
     else:
@@ -103,8 +110,13 @@ def upload():
                 return render_template("upload_failure.html")
 
 
-
-
+@app.route("/genres")
+def genre():
+    url = request.url
+    url = url.split("genre=")
+    genre = url[1]
+    songs = get_by_genre(genre)
+    return render_templare("genres.html", genre=genre, songs=songs)
 
 @app.route("/ArtistPage")
 def ArtistPage():
