@@ -98,9 +98,11 @@ def assess_uploads():
     conn = sqlite3.connect("songs.db")
     c = conn.cursor()
     adding = []
+    global genres
     for genre in genres:
+        insertion = (genre,)
         to_add = (-1,-1,-1,-1,-1,-1,-1,-1)
-        for row in c.execute("SELECT * FROM uploads WITH genre=?", (genre,)):
+        for row in c.execute("SELECT * FROM uploads WHERE genre=?", insertion):
             if to_add[6] < row[6]:
                 to_add = row
             elif to_add[6] == row[6] and to_add[5] < row [5]:
@@ -110,12 +112,4 @@ def assess_uploads():
     c.executemany("INSERT into popular VALUES (?,?,?,?,?,?,?,?)", adding)
     c.execute("DELETE FROM uploads")
     conn.commit()
-    conn.close()
-
-assess_uploads()
-    conn = sqlite3.connect("songs.db")
-    c = conn.cursor()
-    print "popular:"
-    for row in c.execute("SELECT * FROM popular"):
-        print row
     conn.close()
