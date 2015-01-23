@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+<html>
+  {% block bodycontent %}
+  
+  {% for artist in artists %}
+  <a href="/artistpage?{{artist}}"> {{artist}}
+    {% endfor %}
+  
+  {% endblock bodycontent %}
+</html>
