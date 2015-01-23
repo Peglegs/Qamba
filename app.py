@@ -111,7 +111,11 @@ def upload():
             except:
                 return render_template("upload_failure.html")
 
-
+@app.route("/artists")
+def Artists():
+    if "name" not in session:
+        return redirect("/")
+    return render_template("artists.html")
 @app.route("/genres")
 def Genres():
     if "name" not in session:
