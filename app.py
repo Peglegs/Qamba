@@ -95,9 +95,13 @@ def upload():
                 title = request.form['title']
                 song_file = request.files['file']
                 link = generate_link(title, author)
-                store_song(link, song_file)
-                upload_song(title, author, link)
-                sessio
+                if get_space(author) > 0:
+                    store_song(link, song_file)
+                    
+                    special_upload(title, author, link)
+                else:
+                    store_song(link, song_file)
+                    upload_song(title, author, link)
                 return render_template("upload_success.html")
             except:
                 return render_template("upload_failure.html")
