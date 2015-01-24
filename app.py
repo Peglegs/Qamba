@@ -137,6 +137,8 @@ def artists():
     
 @app.route("/artistpage")
 def ArtistPage():
+    if "name" not in session:
+        return redirect("/")
     url = request.url
     url = url.split("?")
     artist = url[1]
