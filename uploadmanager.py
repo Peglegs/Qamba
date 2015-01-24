@@ -6,7 +6,9 @@ import csv
 import os
 import utils
 from time import strftime, gmtime, localtime, time
-global genres = ["Rap", "Rock", "EDM", "Country", "Alternative", "Pop", "Classical", "Metal"]
+
+genres = ["Rap", "Rock", "EDM", "Country", "Alternative", "Pop", "Classical", "Metal"]
+
 def upload_song(title,author,link,genre):
     conn = sqlite3.connect("songs.db")
     c = conn.cursor()

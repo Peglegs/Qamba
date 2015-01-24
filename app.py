@@ -120,7 +120,10 @@ def genre():
 
 @app.route("/artists")
 def artists():
-    artists = get_artists()
+    artistsUser = get_artists()
+    artists = []
+    for artist in artistsUser:
+        artists.append(artist['user'])
     return render_template("artists.html", artists=artists)
     
 @app.route("/artistpage")
