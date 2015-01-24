@@ -7,15 +7,14 @@ app=Flask(__name__)
 
 @app.route("/")
 def home():
-    loggedin = False
     if "name" in session:
-        return render_template("home2.html")
-    return render_template("home.html")
+        return redirect("/profile")
+    return redirect("/login")
 
 @app.route("/login", methods=["GET","POST"])
 def login():
     if "name" in session:
-        return redirect("/")
+        return redirect("/profile")
     if request.method=="GET":
         return render_template("login.html")
     else:
@@ -41,11 +40,14 @@ def login():
 def about():
     return render_template("about.html")
 
+@app.route("/contact")
+def contact():
+    return render_template("contact.html")
 
 @app.route("/newUser", methods=["GET", "POST"])
 def newUser():
     if "name" in session:
-        return redirect("/")
+        return redirect("/profile")
     if request.method=="GET":
         return render_template("newUser.html")
     else:
@@ -56,7 +58,7 @@ def newUser():
         error=None
         if create is True:
             session['name'] = uname
-            return redirect("/")
+            return redirect("/profile")
         else:
             error = "Sorry, the username you have selected already exists or you didn't enter a password."
             return render_template("newUser.html", error=error)
@@ -113,9 +115,10 @@ def upload():
             except:
                 return render_template("upload_failure.html")
 
-
 @app.route("/genres")
 def genre():
+    if "name" not in session:
+        return redirect("/")
     url = request.url
     url = url.split("?")
     genre = url[1]
@@ -124,6 +127,8 @@ def genre():
 
 @app.route("/artists")
 def artists():
+    if "name" not in session:
+        return redirect("/")
     artistsUser = get_artists()
     artists = []
     for artist in artistsUser:
