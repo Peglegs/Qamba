@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 
 {% block bodycontent %}
-<body>
-Upload your songs here! <br> <br>
+<body><br>
+<div align=center>
+<h2>Upload a song here! <br> </h2>
 <form method="POST" enctype="multipart/form-data" >
-Title: <input type="text" name="title" > <br>
+Title: <input type="text" name="title" > <br><br>
 <!-- Change this to a dropdown menu -->
 Genre: <select name="genre">
   <option value="Alternative">Alternative</option>
@@ -15,9 +16,9 @@ Genre: <select name="genre">
   <option value="Other">Other</option>
 
   </select>
-  <br>
-File: <input type="file" name="file" accept="audio/*"> <br>
-<input type="submit" value="Upload">
+  <br><br>
+File: <input type="file" name="file" accept="audio/*"> <br><br>
+<input type="submit" value="Upload" class="pure-button pure-button-primary">
 </form>
 </body>
 {% endblock bodycontent %}
