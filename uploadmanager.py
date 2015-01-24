@@ -16,7 +16,14 @@ def upload_song(title,author,link,genre):
     c.execute("INSERT INTO uploads VALUES (?,?,?,?,?,?,?,?)", insertion)
     conn.commit()
     conn.close()
-    
+
+def special_upload(title,author,link,genre):
+    conn = sqlite3.connect("songs.db")
+    c = conn.cursor()
+    insertion = (time(), title, author, link, genre, 0, 0, 0)
+    c.execute("INSERT INTO popular VALUES (?,?,?,?,?,?,?,?)", insertion)
+    conn.commit()
+    conn.close()
 def generate_link(title, author):
     os.chdir("./songs")
     if not os.path.exists(author):
@@ -113,5 +120,7 @@ def assess_uploads():
             adding.append(to_add)
     c.executemany("INSERT into popular VALUES (?,?,?,?,?,?,?,?)", adding)
     c.execute("DELETE FROM uploads")
+    for thing in adding:
+        make_artist(thing[2])
     conn.commit()
     conn.close()
