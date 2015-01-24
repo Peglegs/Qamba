@@ -11,6 +11,7 @@
     <script type="text/javascript" src="static/projekktor.min.js"></script>
     <script type="text/javascript" src="speakker.min.js"></script>
     <script type="text/javascript" src="/static/main.js"></script>
+
     <style>
     .genre {
       width: 500px;
@@ -51,7 +52,7 @@
  
     dt a:hover {
       font-size: 30px;
-      background-color: #D3D3D3;
+      background-color: #D1D0CE;
     }
   </style> 
 {% endblock headcontent %}
@@ -73,26 +74,25 @@
   </dl>
 </div> 
 
-<div class="example" style='display:none'>
+  
   <div class="small_player"></div>
-</div>
+  
+
 
 
 <script>
-function addURL(element){
 
-  console.log('hello')
+function addURL(element){
   var y = $(element).text()
   document.location.href = "/genres?"+y;
   };
-  console.log(document.location.href)
 if(document.location.href!='http://127.0.0.1:5000/genres'){
   $('.genres').hide()
-  $('.example').show()
+  $('.small_player').show()
 }
 else{
   $('.genres').show()
-  $('.example').hide()
+  $('.small_player').hide()
 }
 
 
