@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request,redirect, session
+from flask import Flask,render_template,request,redirect, session, jsonify
 from pymongo import Connection
 from utils import *
 from uploadmanager import *
@@ -90,6 +90,14 @@ def logout():
     return redirect("/")
 
 
+@app.route("/test")
+def test():
+    views = "2"
+    return render_template("test.html", views=views)
+@app.route('/echo/', methods=['GET'])
+def increment():
+    ret_data = {"value": "" + str(int( request.args.get('views')) + 1)}
+    return jsonify(ret_data)
 
 @app.route("/upload", methods=["GET","POST"])
 def upload():
