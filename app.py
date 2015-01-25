@@ -37,6 +37,11 @@ def about():
     return render_template("about.html")
 
 
+@app.route("/artistGenres")
+def artistGenres():
+    return render_template("artistGenres.html")
+
+
 @app.route("/newUser", methods=["GET", "POST"])
 def newUser():
     if request.method=="GET":
@@ -102,6 +107,17 @@ def upload():
             except:
                 return render_template("upload_failure.html")
 
+
+@app.route("/artists")
+def artists():
+    if "name" not in session:
+        return redirect("/")
+    artistsUser = get_artists()
+    artists = []
+    for artist in artistsUser:
+        artists.append(artist['user'])
+    sort(artists)
+    return render_template("artists.html", artists=artists)
 
 @app.route("/genres")
 def genre():
