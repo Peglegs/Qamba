@@ -74,6 +74,8 @@ def welcome():
 
 @app.route("/discover")
 def discover():
+    if 'name' not in session:
+        return redirect("/")
     return render_template("play.html")
 
  
