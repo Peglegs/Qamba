@@ -104,21 +104,22 @@ def upload():
         if request.method == "GET":
             return render_template("upload.html")
         else:
-            try:
+           # try:
                 author = session["name"]
                 title = request.form['title']
                 song_file = request.files['file']
                 link = generate_link(title, author)
+                genre = request.form['genre']
                 if get_space(author) > 0:
                     store_song(link, song_file)
                     
-                    special_upload(title, author, link)
+                    special_upload(title, author, link, genre)
                 else:
                     store_song(link, song_file)
-                    upload_song(title, author, link)
+                    upload_song(title, author, link,genre)
                 return render_template("upload_success.html")
-            except:
-                return render_template("upload_failure.html")
+            #except:
+            #    return render_template("upload_failure.html")
 @app.route('/echo/', methods=['GET'])
 def increment():
     ret_data = {"value": "" + str(int( request.args.get('views')) + 1)}
@@ -126,17 +127,19 @@ def increment():
 
 @app.route("/genres")
 def genre():
-    try:
+ #   try:
         if "name" not in session:
             return redirect("/")
         url = request.url
         url = url.split("?")
         genre = url[1]
+        print genre
         songs = get_by_genre(genre)
-        return render_template("genres.html", genre=genre, songs=songs)
-    except:
-        genre = "Genre Not Found"
-        return render_template("genres.html", genre = genre) 
+        print songs["uploads"]
+        return render_template("genres.html", genre=genre, songs=songs["uploads"])
+  #  except:
+   #     genre = "Genre Not Found"
+    #    return render_template("genres.html", genre = genre) 
 
 @app.route("/artists")
 def artists():
