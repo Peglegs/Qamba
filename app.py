@@ -71,6 +71,11 @@ def welcome():
         return render_template("welcome.html")
     except:
         return redirect("/")
+
+@app.route("/discover")
+def discover():
+    return render_template("play.html")
+
  
 @app.route("/profile")
 def profile():
@@ -117,13 +122,17 @@ def upload():
 
 @app.route("/genres")
 def genre():
-    if "name" not in session:
-        return redirect("/")
-    url = request.url
-    url = url.split("?")
-    genre = url[1]
-    songs = get_by_genre(genre)
-    return render_templare("genres.html", genre=genre, songs=songs)
+    try:
+        if "name" not in session:
+            return redirect("/")
+        url = request.url
+        url = url.split("?")
+        genre = url[1]
+        songs = get_by_genre(genre)
+        return render_template("genres.html", genre=genre, songs=songs)
+    except:
+        genre = "Genre Not Found"
+        return render_template("genres.html", genre = genre) 
 
 @app.route("/artists")
 def artists():

@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 <html>
   {% block bodycontent %}
-  {{
+  <h1> {{ genre }} </h1>
+  
+  {% for song in songs %}
+  
+  {{ song['title'] }} by  {{ song['author'] }} Views: {{ song['views'] }}  Likes: {{ song['likes'] }} 
 
   {% endblock bodycontent %}
 </html>
