@@ -119,6 +119,10 @@ def upload():
                 return render_template("upload_success.html")
             except:
                 return render_template("upload_failure.html")
+@app.route('/echo/', methods=['GET'])
+def increment():
+    ret_data = {"value": "" + str(int( request.args.get('views')) + 1)}
+    return jsonify(ret_data)
 
 @app.route("/genres")
 def genre():
