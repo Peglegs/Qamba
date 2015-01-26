@@ -103,9 +103,14 @@ def test():
     return render_template("test.html", views=views)
 @app.route('/echo/', methods=['GET'])
 def increment():
-    increment_likes(request.args.get("title"), request.args.get("author")) 
+    link = "" + request.args.get("title") + request.args.get("author")
+    if get_likes(session["name"]) == None or link not in get_likes(session["name"]):
+        increment_likes(request.args.get("title"), request.args.get("author")) 
+        ret_data = {"value":  str(int( request.args.get('views')) + 1)}
+        add_like(session["name"], link)
+    else:
+        ret_data = {"value":  request.args.get('views')}
     print get_all()
-    ret_data = {"value":  str(int( request.args.get('views')) + 1)}
     return jsonify(ret_data)
 
 @app.route("/upload", methods=["GET","POST"])
@@ -116,7 +121,7 @@ def upload():
         if request.method == "GET":
             return render_template("upload.html")
         else:
-           # try:
+            try:
                 author = session["name"]
                 title = request.form['title']
                 song_file = request.files['file']
@@ -130,14 +135,15 @@ def upload():
                     store_song(link, song_file)
                     upload_song(title, author, link,genre)
                 return render_template("upload_success.html")
-            #except:
-            #    return render_template("upload_failure.html")
+            except:
+                return render_template("upload_failure.html")
 
 @app.route("/genres")
 def genre():
- #   try:
-       # if "name" not in session:
-        #    return redirect("/")
+    
+    if "name" not in session:
+        return redirect("/")
+    try:
         url = request.url
         url = url.split("?")
         genre = url[1]
@@ -149,9 +155,9 @@ def genre():
             song[7]=  j
             j = j + 1
         return render_template("genres.html", genre=genre, songs=songs["uploads"])
-  #  except:
-   #     genre = "Genre Not Found"
-    #    return render_template("genres.html", genre = genre) 
+    except:
+        genre = "Genre Not Found"
+        return render_template("genres.html", genre = genre) 
 
 @app.route("/artists")
 def artists():

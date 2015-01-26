@@ -87,6 +87,7 @@ def add_link(artist,link):
     for r in res:
         if r['user'] == artist:
             r['links'].append(link)
+            
             return True
     return False
 
@@ -124,7 +125,14 @@ def add_like(user, link):
     res = db.testbase.find()
     for r in res:
         if r['user'] == user:
-            r['likes'].append(link)
+            if r['likes'] == None:
+                newlikes = []
+            else:
+                newlikes = r['likes']
+            newlikes.append(link)
+            #print newlikes
+            db.testbase.update({"user": user}, { "$set": {"likes" : newlikes} })
+            
 
 
 def get_likes(user):
@@ -133,6 +141,7 @@ def get_likes(user):
     res = db.testbase.find()
     for r in res:
         if r['user'] == user:
+            #print r['likes']
             return r['likes']
     return None
 
