@@ -1,0 +1,104 @@
+
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html>
+  <head>
+{% block headcontent %}
+    <link rel="stylesheet" href="/static/main.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="static/speakker.css"  type="text/css" media="screen">
+    <link rel="stylesheet" href="static/mspeakker.css" type="text/css" media="screen">
+    <script type="text/javascript" src="static/jquery.min.js"></script>
+    <script type="text/javascript" src="static/projekktor.min.js"></script>
+    <script type="text/javascript" src="speakker.min.js"></script>
+    <script type="text/javascript" src="/static/main.js"></script>
+
+    <style>
+    .genre {
+      width: 500px;
+    }
+ 
+    h2 {
+      font: 400 40px/1.5 Helvetica, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+ 
+    dl {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+ 
+    dt {
+      font: 200 20px/1.5 Helvetica, Verdana, sans-serif;
+      border-bottom: 1px solid #ccc;
+      color:#fff;
+    }
+ 
+ 
+    dt a {
+      text-decoration: none;
+      color: #000;
+      display: block;
+      width: 200px;
+      color:green;
+ 
+      -webkit-transition: font-size 0.3s ease, background-color 0.3s ease;
+      -moz-transition: font-size 0.3s ease, background-color 0.3s ease;
+      -o-transition: font-size 0.3s ease, background-color 0.3s ease;
+      -ms-transition: font-size 0.3s ease, background-color 0.3s ease;
+      transition: font-size 0.3s ease, background-color 0.3s ease;
+    }
+ 
+    dt a:hover {
+      font-size: 30px;
+      background-color: #D1D0CE;
+    }
+  </style> 
+{% endblock headcontent %}
+</head>
+<body>
+       
+{% block bodycontent %}
+<div class ='genres'>
+  <dl class ='genres'>
+    <h2 class ='genres'>Genres</h2>
+    <dt class ='genres'onclick=addURL(this)><a>Rap</a></dt>
+    <dt class ='genres'onclick=addURL(this)><a>Rock</a></dt>
+    <dt class ='genres'onclick=addURL(this)><a>EDM</a></dt>
+    <dt class ='genres'onclick=addURL(this)><a>Country</a></dt>
+    <dt class ='genres'onclick=addURL(this)><a>Classical</a></dt>
+    <dt class ='genres'onclick=addURL(this)><a>Alternative</a></dt>
+    <dt class ='genres'onclick=addURL(this)><a>Pop</a></dt>
+    <dt class ='genres'onclick=addURL(this)><a>Metal</a></dt>
+  </dl>
+</div> 
+
+  
+  <div class="small_player"></div>
+  
+
+
+
+<script>
+function addURL(element){
+  var y = $(element).text()
+  document.location.href = "/genres?"+y;
+  };
+if(document.location.href!='http://127.0.0.1:5000/genres'){
+  $('.genres').hide()
+  $('.small_player').show()
+}
+else{
+  $('.genres').show()
+  $('.small_player').hide()
+}
+$('.genres').click(function(){
+  console.log('hello')
+})
+</script> 
+ 
+{% endblock bodycontent %}
+</body>
+
+</html>
