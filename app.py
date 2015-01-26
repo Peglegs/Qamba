@@ -103,7 +103,9 @@ def test():
     return render_template("test.html", views=views)
 @app.route('/echo/', methods=['GET'])
 def increment():
-    ret_data = {"value": "" + str(int( request.args.get('views')) + 1)}
+    increment_likes(request.args.get("title"), request.args.get("author")) 
+    print get_all()
+    ret_data = {"value":  str(int( request.args.get('views')) + 1)}
     return jsonify(ret_data)
 
 @app.route("/upload", methods=["GET","POST"])
@@ -130,22 +132,22 @@ def upload():
                 return render_template("upload_success.html")
             #except:
             #    return render_template("upload_failure.html")
-@app.route('/echo/', methods=['GET'])
-def increment():
-    ret_data = {"value": "" + str(int( request.args.get('views')) + 1)}
-    return jsonify(ret_data)
 
 @app.route("/genres")
 def genre():
  #   try:
-        if "name" not in session:
-            return redirect("/")
+       # if "name" not in session:
+        #    return redirect("/")
         url = request.url
         url = url.split("?")
         genre = url[1]
         print genre
         songs = get_by_genre(genre)
-        print songs["uploads"]
+        j = 1
+        for song in songs["uploads"]:
+            song =list(song)
+            song[7]=  j
+            j = j + 1
         return render_template("genres.html", genre=genre, songs=songs["uploads"])
   #  except:
    #     genre = "Genre Not Found"

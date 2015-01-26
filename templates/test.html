@@ -16,9 +16,9 @@
             type: "GET",
             url: $SCRIPT_ROOT + "/echo/",
             contentType: "application/json; charset=utf-8",
-            data: { views: $('div[name="views"]').html() },
+            data: { views: $('div[name="{{views}}views"]').html() },
             success: function(data) {
-                $('#views').text(data.value);
+                $('#{{views}}views').text(data.value);
             }
         });     
     });
@@ -26,4 +26,4 @@
 </script>
 <strong>Click to Increment Views:</strong>
 <button type="button" id="submitBtn"  name="submitBtn">Button</button><br><br>
-<strong>Views:<div name="views" id="views">{{views}}</div></strong>
+<strong>Views:<div name="{{views}}views" id="{{views}}views">{{views}}</div></strong>
