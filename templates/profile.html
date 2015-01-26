@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block bodycontent %}
+<<<<<<< HEAD
 
 Hey {{user}},
 <br><br>
@@ -8,14 +9,29 @@ Artist Status: {% if artist %} You have {{space}}mb left to upload songs.
 {% else %} You are not an artist {% endif %}
 <br><br>
 Your currently uploaded songs:
+=======
+<div align=center><h1>Profile: {{user}}</h1></div>
+<br>
+<a class="pure-button pure-button-primary"href="/upload">Upload a Song</a>
+<h3><u>
+Artist Status</u>: {% if artist %} You have {{space}}mb left to upload songs. 
+{% else %} You are not an artist {% endif %}
+<br><br><u>
+Your currently uploaded songs</u>:
+>>>>>>> master
 <br>
 
 {% for link in links %}
 <li> {{link}} </li>
 {% endfor %}
 <br><br>
+<<<<<<< HEAD
 
 Songs you've liked:
+=======
+<u>
+Songs you've liked</u>:
+>>>>>>> master
 <br>
 
 {% for like in likes %}

@@ -6,9 +6,6 @@ import csv
 import os
 import utils
 from time import strftime, gmtime, localtime, time
-<<<<<<< HEAD
-genres = ["Rap", "Rock", "EDM", "Country", "Alternative", "Pop", "Classical", "Metal"]
-=======
 
 genres = ["Rap", "Rock", "EDM", "Country", "Alternative", "Pop", "Classical", "Metal"]
 def get_all():
@@ -18,7 +15,6 @@ def get_all():
     out = c.fetchall()
     conn.close()
     return out
->>>>>>> master
 def upload_song(title,author,link,genre):
     conn = sqlite3.connect("songs.db")
     c = conn.cursor()
@@ -136,8 +132,5 @@ def assess_uploads():
         make_artist(thing[2])
     conn.commit()
     conn.close()
-<<<<<<< HEAD
-=======
-#print get_all()
-#print get_by_genre("Classical")
->>>>>>> master
+print get_all()
+print get_by_genre("Classical")

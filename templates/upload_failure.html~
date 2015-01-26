@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 <html>
   {% block bodycontent %}
-  Success! Click <a href="/">here</a> to return to the homepage
+  Your download has failed. Click <a href="/upload">here</a> to try again
   {% endblock bodycontent %}
 </html>

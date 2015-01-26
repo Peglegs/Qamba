@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+<<<<<<< HEAD
+<html>
+  {% block bodycontent %}
+  
+  {% for artist in artists %}
+  <a href="/artistpage?{{artist}}"> {{artist}}
+    {% endfor %}
+  
+  {% endblock bodycontent %}
+</html>
+=======
+{% block bodycontent %}
+<div align="center">
+  <h1>Artists</h1></div><br>
+  <h2>Qamba is an app designed to put YOU in the heart of new and unheard of music. It's the perfect app to feed your inner hipster.  Feel free to <a href="/upload"> upload</a> your own music, or just browse, listen, and enjoy!
+
+  {% endblock bodycontent %}
+>>>>>>> emorg

@@ -63,7 +63,11 @@
 <div class ='genres'>
   <dl class ='genres'>
     <h2 class ='genres'>Genres</h2>
+<<<<<<< HEAD
     <dt href='/genres' class ='genres'onclick=addURL(this)><a>Rap</a></dt>
+=======
+    <dt class ='genres'onclick=addURL(this)><a>Rap</a></dt>
+>>>>>>> master
     <dt class ='genres'onclick=addURL(this)><a>Rock</a></dt>
     <dt class ='genres'onclick=addURL(this)><a>EDM</a></dt>
     <dt class ='genres'onclick=addURL(this)><a>Country</a></dt>
@@ -74,6 +78,7 @@
   </dl>
 </div> 
 
+<<<<<<< HEAD
  <div class="songs"> 
    <div class="small_player"></div>
 </div>
@@ -111,10 +116,37 @@ $('.genres').click(function(){
   console.log('hello')
 })
 
+=======
+  
+  <div class="small_player"></div>
+  
+
+
+
+<script>
+function addURL(element){
+  var y = $(element).text()
+  document.location.href = "/genres?"+y;
+  };
+if(document.location.href!='http://127.0.0.1:5000/genres'){
+  $('.genres').hide()
+  $('.small_player').show()
+}
+else{
+  $('.genres').show()
+  $('.small_player').hide()
+}
+$('.genres').click(function(){
+  console.log('hello')
+})
+>>>>>>> master
 </script> 
  
 {% endblock bodycontent %}
 </body>
 
 </html>
+<<<<<<< HEAD
 
+=======
+>>>>>>> master

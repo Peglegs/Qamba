@@ -21,7 +21,7 @@ def newAuth(uname,pword):
     if len(uname) == 0 or len(pword) ==0:
             return False
     conn=Connection()
-    db=conn["mydb"]
+    db=conn["userdb"]
     #floop(db.testbase.find())
     #db.testbase.drop()
     #db.testbase.insert({'user':'moo', 'pw':'oink'})
@@ -45,27 +45,92 @@ def newUser(uname,pword):
 	if len(uname) == 0 or len(pword) ==0:
 		return False
 	conn=Connection()
-	db=conn["mydb"]
+	db=conn["userdb"]
 	if mfloop(db.testbase.find(),uname):
 		return False
 	#floop(db.testbase.find())
 	#db.testbase.drop()
+<<<<<<< HEAD
 	db.testbase.insert({'user':uname, 'pw':pword, 'artist':False, 'links':[], 'likes':[]})
 	return True
 
 def add_link(artist,link):
     conn=Connection()
     db=conn["mydb"]
+=======
+	db.testbase.insert({'user':uname, 'pw':pword, 'artist':False, 'links':[], 'likes':[], 'space':0})
+	return True
+
+
+def decrement_space(artist):
+    conn=Connection()
+    db=conn["userdb"]
+    res = db.testbase.find()
+    for r in res:
+        if r['user'] == artist:
+                r['space'] = r['space'] - 1
+    return r['space']
+                
+def set_space(artist,num):
+    conn=Connection()
+    db=conn["userdb"]
+    res = db.testbase.find()
+    for r in res:
+        if r['user'] == artist:
+            r['space'] = num
+    return r['space']
+            
+def get_space(artist):
+    conn=Connection()
+    db=conn["userdb"]
+    res = db.testbase.find()
+    for r in res:
+        if r['user'] == artist:
+          return r['space']
+                
+def add_link(artist,link):
+    conn=Connection()
+    db=conn["userdb"]
+>>>>>>> master
     res = db.testbase.find()
     for r in res:
         if r['user'] == artist:
             r['links'].append(link)
+<<<<<<< HEAD
             return True
     return False
                 
 def is_artist(artist):
     conn=Connection()
     db=conn["mydb"]
+=======
+            
+            return True
+    return False
+
+def make_artist(user):
+    conn=Connection()
+    db=conn["userdb"]
+    res = db.testbase.find()
+    for r in res:
+        if r['user'] == user:
+            r['artist'] = True
+
+
+def get_artists():
+    answer = []
+    conn=Connection()
+    db=conn["userdb"]
+    res = db.testbase.find()
+    for r in res:
+        if r['artist'] == True:
+                answer.append(r)
+    return answer
+
+def is_artist(artist):
+    conn=Connection()
+    db=conn["userdb"]
+>>>>>>> master
     res = db.testbase.find()
     for r in res:
         if r['user'] == artist:
@@ -74,25 +139,48 @@ def is_artist(artist):
 
 def add_like(user, link):
     conn=Connection()
+<<<<<<< HEAD
     db=conn["mydb"]
     res = db.testbase.find()
     for r in res:
         if r['user'] == user:
             r['likes'].append(link)
+=======
+    db=conn["userdb"]
+    res = db.testbase.find()
+    for r in res:
+        if r['user'] == user:
+            if r['likes'] == None:
+                newlikes = []
+            else:
+                newlikes = r['likes']
+            newlikes.append(link)
+            #print newlikes
+            db.testbase.update({"user": user}, { "$set": {"likes" : newlikes} })
+            
+>>>>>>> master
 
 
 def get_likes(user):
     conn=Connection()
+<<<<<<< HEAD
     db=conn["mydb"]
     res = db.testbase.find()
     for r in res:
         if r['user'] == user:
+=======
+    db=conn["userdb"]
+    res = db.testbase.find()
+    for r in res:
+        if r['user'] == user:
+            #print r['likes']
+>>>>>>> master
             return r['likes']
     return None
 
 def find_links(artist):
     conn=Connection()
-    db=conn["mydb"]
+    db=conn["userdb"]
     res = db.testbase.find()
     for r in res:
         if r['user'] == artist:

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript">
+  var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+</head>
+  {% block bodycontent %}
+  <h1> {{ genre }} </h1>
+  
+  {% for song in songs %}
+  
+  {{ song[1] }} by  {{ song[2] }} Views: {{ song[5] }}   
+<script type="text/javascript">
+  $(function() {
+    $("#submitBtn").click(function() {
+         $.ajax({
+            type: "GET",
+            url: $SCRIPT_ROOT + "/echo/",
+            contentType: "application/json; charset=utf-8",
+            data: { views: $('div[name="{{song[1]}}views"]').html() },
+            success: function(data) {
+                $('#{{song[1]}}views').text(data.value);
+            }
+        });
+    });
+  });
+  
+</script>
+<br><br>
+<button type="button" id="submitBtn"  name="submitBtn">Like</button>
+<strong>Likes:<div name="{{song[1]}}views" id="{{song[1]}}views">{{song[6]}}</div></strong>
+
+
+  {% endfor %}
+
+  {% endblock bodycontent %}
+</html>

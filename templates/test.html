@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript">
+  var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>        
+
+</head>
+<body>
+<script type="text/javascript">
+  $(function() {
+    $("#submitBtn").click(function() {
+         $.ajax({
+            type: "GET",
+            url: $SCRIPT_ROOT + "/echo/",
+            contentType: "application/json; charset=utf-8",
+            data: { views: $('div[name="{{views}}views"]').html() },
+            success: function(data) {
+                $('#{{views}}views').text(data.value);
+            }
+        });     
+    });
+  });
+</script>
+<strong>Click to Increment Views:</strong>
+<button type="button" id="submitBtn"  name="submitBtn">Button</button><br><br>
+<strong>Views:<div name="{{views}}views" id="{{views}}views">{{views}}</div></strong>

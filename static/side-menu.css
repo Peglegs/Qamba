@@ -1,6 +1,7 @@
 body {
+    background: #000000;
     color: #348017;
-    background: #D1D0CE;
+    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
 }
 .pure-img-responsive {
 max-width: 100%;
@@ -47,23 +48,27 @@ margin-bottom: 50px;
 line-height: 1.6em;
 }
 .header {
+font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
 margin: 0;
-color: #348017;
+color: #888;
 text-align: center;
 padding: 2.5em 2em 0;
 border-bottom: 1px solid #eee;
 }
 .header h1 {
+font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
 margin: 0.2em 0;
 font-size: 3em;
 font-weight: 300;
 }
 .header h2 {
+font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
 font-weight: 300;
 padding: 0;
 margin-top: 0;
 }
 .content-subhead {
+font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
 margin: 50px 0 20px 0;
 font-weight: 300;
 color: #888;

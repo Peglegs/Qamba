@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+<html>
+  <head>
+    {% block headcontent %}
+    <style>
+  dt a {
+      text-decoration: none;
+      color: #000;
+      display: block;
+      width: 200px;
+      color:green;
+ 
+      -webkit-transition: font-size 0.3s ease, background-color 0.3s ease;
+      -moz-transition: font-size 0.3s ease, background-color 0.3s ease;
+      -o-transition: font-size 0.3s ease, background-color 0.3s ease;
+      -ms-transition: font-size 0.3s ease, background-color 0.3s ease;
+      transition: font-size 0.3s ease, background-color 0.3s ease;
+  }
+  dt a:hover {
+      font-size: 30px;
+      background-color: #D3D3D3;
+  }
+  </style> 
+  {% endblock headcontent %}
+  </head>
+  {% block bodycontent %}
+  <div align=center>
+    <h1>Artists</h1</div><br><h3>
+  {% for artist in artists %}
+  <dt><a id='coop' href="/artistpage?{{artist}}"> {{artist}} </a></dt>
+  <br>
+  {% endfor %}
+  
+  {% endblock bodycontent %}
+</html>
