@@ -63,41 +63,17 @@
 <div class ='genres'>
   <dl class ='genres'>
     <h2 class ='genres'>Genres</h2>
-    <dt class ='genres'onclick=addURL(this)><a>Rap</a></dt>
-    <dt class ='genres'onclick=addURL(this)><a>Rock</a></dt>
-    <dt class ='genres'onclick=addURL(this)><a>EDM</a></dt>
-    <dt class ='genres'onclick=addURL(this)><a>Country</a></dt>
-    <dt class ='genres'onclick=addURL(this)><a>Classical</a></dt>
-    <dt class ='genres'onclick=addURL(this)><a>Alternative</a></dt>
-    <dt class ='genres'onclick=addURL(this)><a>Pop</a></dt>
-    <dt class ='genres'onclick=addURL(this)><a>Metal</a></dt>
+    <dt class ='genres'><a href="/genres/Rap">Rap</a></dt>
+    <dt class ='genres'><a href="/genres/Rock">Rock</a></dt>
+    <dt class ='genres'><a href="/genres/EDM">EDM</a></dt>
+    <dt class ='genres'><a href="/genres/Country">Country</a></dt>
+    <dt class ='genres'><a href="/genres/Classical">Classical</a></dt>
+    <dt class ='genres'><a href="/genres/Alternative">Alternative</a></dt>
+    <dt class ='genres'><a href="/genres/Pop">Pop</a></dt>
+    <dt class ='genres'><a href="/genres/Metal">Metal</a></dt>
   </dl>
 </div> 
 
-  
-  <div class="small_player"></div>
-  
-
-
-
-<script>
-function addURL(element){
-  var y = $(element).text()
-  document.location.href = "/genres?"+y;
-  };
-if(document.location.href!='http://127.0.0.1:5000/genres'){
-  $('.genres').hide()
-  $('.small_player').show()
-}
-else{
-  $('.genres').show()
-  $('.small_player').hide()
-}
-$('.genres').click(function(){
-  console.log('hello')
-})
-</script> 
- 
 {% endblock bodycontent %}
 </body>
 

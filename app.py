@@ -138,15 +138,12 @@ def upload():
             except:
                 return render_template("upload_failure.html")
 
-@app.route("/genres")
-def genre():
-    
+@app.route("/genres/<genre>")
+def genre(genre = None):
+    global genres
     if "name" not in session:
         return redirect("/")
-    try:
-        url = request.url
-        url = url.split("?")
-        genre = url[1]
+    if genre != None and genre in genres:
         print genre
         songs = get_by_genre(genre)
         j = 1
@@ -155,9 +152,9 @@ def genre():
             song[7]=  j
             j = j + 1
         return render_template("genres.html", genre=genre, songs=songs["uploads"])
-    except:
+    else:
         genre = "Genre Not Found"
-        return render_template("genres.html", genre = genre) 
+        return render_template("play.html") 
 
 @app.route("/artists")
 def artists():

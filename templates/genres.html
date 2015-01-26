@@ -9,7 +9,20 @@
 {% endblock jquery %}
 {% block bodycontent %}
     <h1> {{ genre }} </h1>
-  
+ 
+
+
+<div class="small_player"></div>
+<script>
+$(document).ready(function() {
+$(".small_player").speakker({
+file: 'songs/Mark/Mark.mp3',
+poster: '',
+title: 'hello',
+theme: 'dark'
+});
+});
+</script> 
   {% for song in songs %}
   
   {{ song[1] }} by  {{ song[2] }} Views: {{ song[5] }}   
