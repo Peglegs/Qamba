@@ -4,13 +4,6 @@
 <html>
   <head>
 {% block headcontent %}
-    <link rel="stylesheet" href="/static/main.css" type="text/css" media="screen">
-    <link rel="stylesheet" href="static/speakker.css"  type="text/css" media="screen">
-    <link rel="stylesheet" href="static/mspeakker.css" type="text/css" media="screen">
-    <script type="text/javascript" src="static/jquery.min.js"></script>
-    <script type="text/javascript" src="static/projekktor.min.js"></script>
-    <script type="text/javascript" src="speakker.min.js"></script>
-    <script type="text/javascript" src="/static/main.js"></script>
 
     <style>
     .genre {
@@ -52,7 +45,7 @@
  
     dt a:hover {
       font-size: 30px;
-      background-color: #D1D0CE;
+      background-color: #0000;
     }
   </style> 
 {% endblock headcontent %}
@@ -63,14 +56,14 @@
 <div class ='genres'>
   <dl class ='genres'>
     <h2 class ='genres'>Genres</h2>
+    <dt class ='genres'><a href="/genres/Alternative">Alternative</a></dt>
+    <dt class ='genres'><a href="/genres/Classical">Classical</a></dt>
+    <dt class ='genres'><a href="/genres/Country">Country</a></dt>
+    <dt class ='genres'><a href="/genres/EDM">EDM</a></dt>
+    <dt class ='genres'><a href="/genres/Metal">Metal</a></dt>
+    <dt class ='genres'><a href="/genres/Pop">Pop</a></dt>
     <dt class ='genres'><a href="/genres/Rap">Rap</a></dt>
     <dt class ='genres'><a href="/genres/Rock">Rock</a></dt>
-    <dt class ='genres'><a href="/genres/EDM">EDM</a></dt>
-    <dt class ='genres'><a href="/genres/Country">Country</a></dt>
-    <dt class ='genres'><a href="/genres/Classical">Classical</a></dt>
-    <dt class ='genres'><a href="/genres/Alternative">Alternative</a></dt>
-    <dt class ='genres'><a href="/genres/Pop">Pop</a></dt>
-    <dt class ='genres'><a href="/genres/Metal">Metal</a></dt>
   </dl>
 </div> 
 
