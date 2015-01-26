@@ -63,7 +63,7 @@
 <div class ='genres'>
   <dl class ='genres'>
     <h2 class ='genres'>Genres</h2>
-    <dt class ='genres'onclick=addURL(this)><a>Rap</a></dt>
+    <dt href='/genres' class ='genres'onclick=addURL(this)><a>Rap</a></dt>
     <dt class ='genres'onclick=addURL(this)><a>Rock</a></dt>
     <dt class ='genres'onclick=addURL(this)><a>EDM</a></dt>
     <dt class ='genres'onclick=addURL(this)><a>Country</a></dt>
@@ -74,25 +74,36 @@
   </dl>
 </div> 
 
-  
-  <div class="small_player"></div>
-  
-
-
+ <div class="songs"> 
+   <div class="small_player"></div>
+</div>
 
 <script>
+$(document).ready(function() {
+    $(".small_player").speakker({
+        file: 'songs/Mark/Mark.mp3',
+        poster: '',
+        title: 'hello',
+        theme: 'dark'
+    });
+});
 
 function addURL(element){
-  var y = $(element).text()
+  y = $(element).text()
   document.location.href = "/genres?"+y;
   };
+var x = document.location.href
+x = x.split('/genres?')
+x=x[1]
+$('.songs').prepend('<h1>'+x+'</h1>')
+
 if(document.location.href!='http://127.0.0.1:5000/genres'){
   $('.genres').hide()
-  $('.small_player').show()
+  $('.songs').show()
 }
 else{
   $('.genres').show()
-  $('.small_player').hide()
+  $('.songs').hide()
 }
 
 

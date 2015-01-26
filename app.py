@@ -28,12 +28,17 @@ with open("songs.json", "w") as outfile:
 def play():
     if 'name' not in session:
         return redirect("/")
-    else:
-	if request.method=="GET":
-        	return render_template("play.html")
-	else:
-		return render_template("play.html")
-
+    else:   
+        try:
+            url = request.url
+            url = url.split("/genres?")
+            genre = url[1]
+            print genre
+            songs = get_by_genre(genre)
+            return render_template("play.html", genre=genre, songs=songs)
+        except:
+            return render_template('play.html')
+        
 
 
 @app.route("/")
