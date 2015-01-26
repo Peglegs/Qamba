@@ -1,7 +1,5 @@
+import pymongo
 from pymongo import Connection
-
-
-
 #new authenticate in progress below:
 
 def floop(x,u,p):
@@ -52,17 +50,53 @@ def newUser(uname,pword):
 		return False
 	#floop(db.testbase.find())
 	#db.testbase.drop()
-	db.testbase.insert({'user':uname, 'pw':pword})
+	db.testbase.insert({'user':uname, 'pw':pword, 'artist':False, 'links':[], 'likes':[]})
 	return True
 
-def find_artist(artist):
+def add_link(artist,link):
     conn=Connection()
     db=conn["mydb"]
     res = db.testbase.find()
     for r in res:
         if r['user'] == artist:
-            if r['artist'] == True:
-                return r
+            r['links'].append(link)
+            return True
+    return False
+                
+def is_artist(artist):
+    conn=Connection()
+    db=conn["mydb"]
+    res = db.testbase.find()
+    for r in res:
+        if r['user'] == artist:
+            return r['artist']
+
+
+def add_like(user, link):
+    conn=Connection()
+    db=conn["mydb"]
+    res = db.testbase.find()
+    for r in res:
+        if r['user'] == user:
+            r['likes'].append(link)
+
+
+def get_likes(user):
+    conn=Connection()
+    db=conn["mydb"]
+    res = db.testbase.find()
+    for r in res:
+        if r['user'] == user:
+            return r['likes']
+    return None
+
+def find_links(artist):
+    conn=Connection()
+    db=conn["mydb"]
+    res = db.testbase.find()
+    for r in res:
+        if r['user'] == artist:
+            return r['links']
     return None
 
 

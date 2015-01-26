@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block bodycontent %}
+
+Hey {{user}},
+<br><br>
+Artist Status: {% if artist %} You have {{space}}mb left to upload songs. 
+{% else %} You are not an artist {% endif %}
+<br><br>
+Your currently uploaded songs:
+<br>
+
+{% for link in links %}
+<li> {{link}} </li>
+{% endfor %}
+<br><br>
+
+Songs you've liked:
+<br>
+
+{% for like in likes %}
+<li> {{like}} </li>
+{% endfor %}
+
+
+{% endblock bodycontent %}

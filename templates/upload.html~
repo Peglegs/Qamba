@@ -1,8 +1,0 @@
-<body>
-Upload your songs here! <br> <br>
-<form> 
-Title: <input type="text" name="title"> <br>
-File: <input type="file" name="file" accept="audio/*"> <br>
-<input type="submit" value="Upload">
-</form>
-</body>
