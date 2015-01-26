@@ -3,6 +3,14 @@
 <!DOCTYPE html>
 <html>
   <head>
+{% block jquery %}
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript">
+  var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+{% endblock jquery %}
+
 {% block headcontent %}
     <link rel="stylesheet" href="/static/main.css" type="text/css" media="screen">
     <link rel="stylesheet" href="static/speakker.css"  type="text/css" media="screen">
@@ -60,14 +68,10 @@
 <body>
        
 {% block bodycontent %}
-<div class ='genres'>
+<div id='bbb' class ='genres'>
   <dl class ='genres'>
     <h2 class ='genres'>Genres</h2>
-<<<<<<< HEAD
     <dt href='/genres' class ='genres'onclick=addURL(this)><a>Rap</a></dt>
-=======
-    <dt class ='genres'onclick=addURL(this)><a>Rap</a></dt>
->>>>>>> master
     <dt class ='genres'onclick=addURL(this)><a>Rock</a></dt>
     <dt class ='genres'onclick=addURL(this)><a>EDM</a></dt>
     <dt class ='genres'onclick=addURL(this)><a>Country</a></dt>
@@ -78,8 +82,14 @@
   </dl>
 </div> 
 
-<<<<<<< HEAD
  <div class="songs"> 
+<script type="text/javascript">
+  $(function() {
+    $("#bbb").click(function() {
+  console.log("success");
+  });
+</script>
+
    <div class="small_player"></div>
 </div>
 
@@ -116,8 +126,6 @@ $('.genres').click(function(){
   console.log('hello')
 })
 
-=======
-  
   <div class="small_player"></div>
   
 
@@ -139,14 +147,9 @@ else{
 $('.genres').click(function(){
   console.log('hello')
 })
->>>>>>> master
 </script> 
  
 {% endblock bodycontent %}
 </body>
 
 </html>
-<<<<<<< HEAD
-
-=======
->>>>>>> master
