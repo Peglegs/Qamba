@@ -88,6 +88,10 @@ def profile():
         links = find_links(user)
         artist = is_artist(user)
         likes = get_likes(user)
+        if links == None:
+            links = []
+        if likes == None:
+            likes = []
         return render_template("profile.html", user=user, links=links, artist=artist, likes = likes)
 
 
