@@ -132,5 +132,5 @@ def assess_uploads():
         make_artist(thing[2])
     conn.commit()
     conn.close()
-print get_all()
-print get_by_genre("Classical")
+#print get_all()
+#print get_by_genre("Classical")

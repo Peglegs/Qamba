@@ -31,11 +31,11 @@ def special_upload(title,author,link,genre):
     conn.commit()
     conn.close()
 def generate_link(title, author):
-    os.chdir("./songs")
+    os.chdir("./genres/songs")
     if not os.path.exists(author):
         os.makedirs(author)
     os.chdir("..")
-    return "./songs/" + author + "/" + title
+    return "./genres/songs/" + author + "/" + title
 
 
 def store_song(link, song_file):
