@@ -139,6 +139,7 @@ def upload():
                 else:
                     store_song(link, song_file)
                     upload_song(title, author, link,genre)
+                add_link(session["name"], link)
                 return render_template("upload_success.html")
             except:
                 return render_template("upload_failure.html")
