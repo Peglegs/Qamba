@@ -1,10 +1,10 @@
-from flask import Flask,render_template,request,redirect, session, jsonify
+from flask import  Flask,request,url_for,redirect,render_template,session,flash, jsonify
 from pymongo import Connection
 from utils import *
 from uploadmanager import *
 
-app=Flask(__name__)
-
+app=Flask(__name__, static_url_path='',static_folder='')
+app.config['SECRET_KEY'] = "secret key"
 @app.route("/")
 def home():
     if "name" in session:
@@ -88,6 +88,10 @@ def profile():
         links = find_links(user)
         artist = is_artist(user)
         likes = get_likes(user)
+        if links == None:
+            links = []
+        if likes == None:
+            likes = []
         return render_template("profile.html", user=user, links=links, artist=artist, likes = likes)
 
 
@@ -101,9 +105,17 @@ def logout():
 def test():
     views = "2"
     return render_template("test.html", views=views)
+    
 @app.route('/echo/', methods=['GET'])
 def increment():
-    ret_data = {"value": "" + str(int( request.args.get('views')) + 1)}
+    link = "" + request.args.get("title") + request.args.get("author")
+    if get_likes(session["name"]) == None or link not in get_likes(session["name"]):
+        increment_likes(request.args.get("title"), request.args.get("author")) 
+        ret_data = {"value":  str(int( request.args.get('views')) + 1)}
+        add_like(session["name"], link)
+    else:
+        ret_data = {"value":  request.args.get('views')}
+    print get_all()
     return jsonify(ret_data)
 
 @app.route("/upload", methods=["GET","POST"])
@@ -114,7 +126,7 @@ def upload():
         if request.method == "GET":
             return render_template("upload.html")
         else:
-           # try:
+            try:
                 author = session["name"]
                 title = request.form['title']
                 song_file = request.files['file']
@@ -128,28 +140,26 @@ def upload():
                     store_song(link, song_file)
                     upload_song(title, author, link,genre)
                 return render_template("upload_success.html")
-            #except:
-            #    return render_template("upload_failure.html")
-@app.route('/echo/', methods=['GET'])
-def increment():
-    ret_data = {"value": "" + str(int( request.args.get('views')) + 1)}
-    return jsonify(ret_data)
+            except:
+                return render_template("upload_failure.html")
 
-@app.route("/genres")
-def genre():
- #   try:
-        if "name" not in session:
-            return redirect("/")
-        url = request.url
-        url = url.split("?")
-        genre = url[1]
+@app.route("/genres/<genre>")
+def genre(genre = None):
+    global genres
+    if "name" not in session:
+        return redirect("/")
+    if genre != None and genre in genres:
         print genre
         songs = get_by_genre(genre)
-        print songs["uploads"]
+        j = 1
+        for song in songs["uploads"]:
+            song =list(song)
+            song[7]=  j
+            j = j + 1
         return render_template("genres.html", genre=genre, songs=songs["uploads"])
-  #  except:
-   #     genre = "Genre Not Found"
-    #    return render_template("genres.html", genre = genre) 
+    else:
+        genre = "Genre Not Found"
+        return render_template("play.html") 
 
 @app.route("/artists")
 def artists():

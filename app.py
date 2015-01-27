@@ -146,17 +146,19 @@ def upload():
 @app.route("/genres/<genre>")
 def genre(genre = None):
     global genres
-    if "name" not in session:
-        return redirect("/")
+    #if "name" not in session:
+    #    return redirect("/")
     if genre != None and genre in genres:
         print genre
         songs = get_by_genre(genre)
         j = 1
+        out = []
         for song in songs["uploads"]:
             song =list(song)
-            song[7]=  j
+            song[7] = j
             j = j + 1
-        return render_template("genres.html", genre=genre, songs=songs["uploads"])
+            out.append(song)
+        return render_template("genres.html", genre=genre, songs=out)
     else:
         genre = "Genre Not Found"
         return render_template("play.html") 
