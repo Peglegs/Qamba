@@ -65,6 +65,15 @@ def get_by_genre(genre):
     ret['popular'] = c.execute("SELECT * FROM popular WHERE genre=?", find).fetchall()
     conn.close()
     return ret
+def get_by_artist(artist):
+    conn = sqlite3.connect("songs.db")
+    c = conn.cursor()
+    ret = {}
+    find =(artist,)
+    ret['uploads'] = c.execute("SELECT * FROM uploads WHERE author=?", find).fetchall()
+    ret['popular'] = c.execute("SELECT * FROM popular WHERE author=?", find).fetchall()
+    conn.close()
+    return ret
 
 def increment_views(title, author):
     conn = sqlite3.connect("songs.db")
