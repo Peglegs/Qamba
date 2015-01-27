@@ -50,7 +50,7 @@ def newUser(uname,pword):
 		return False
 	#floop(db.testbase.find())
 	#db.testbase.drop()
-	db.testbase.insert({'user':uname, 'pw':pword, 'artist':True, 'links':[], 'likes':[], 'space':0})
+	db.testbase.insert({'user':uname, 'pw':pword, 'artist':False, 'links':[], 'likes':[], 'space':0})
 	return True
 
 
