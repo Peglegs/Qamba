@@ -4,7 +4,7 @@ from utils import *
 from uploadmanager import *
 
 app=Flask(__name__, static_url_path='',static_folder='')
-
+app.config['SECRET_KEY'] = "secret key"
 @app.route("/")
 def home():
     if "name" in session:
