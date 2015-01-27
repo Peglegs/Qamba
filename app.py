@@ -85,14 +85,19 @@ def profile():
         return redirect("/")
     else:
         user = session['name']
-        links = find_links(user)
+        songs = get_by_artist(user)
+        j = 1
+        out = []
+        for song in songs["uploads"]:
+            song =list(song)
+            song[7] = j
+            j = j + 1
+            out.append(song)
         artist = is_artist(user)
-        likes = get_likes(user)
-        if links == None:
-            links = []
+        likes = get_likes(user) 
         if likes == None:
             likes = []
-        return render_template("profile.html", user=user, links=links, artist=artist, likes = likes)
+        return render_template("profile.html", user=user, links=out, artist=artist, likes = likes)
 
 
 @app.route("/logout", methods=["GET", "POST"])
@@ -182,9 +187,6 @@ def ArtistPage():
     url = url.split("?")
     artist = url[1]
     songs = get_by_artist(artist)
-    '''if music == None:
-        error = "Artist not found"
-        return render_template("ArtistPage.html", error = error)'''
     j = 1
     out = []
     for song in songs["uploads"]:
