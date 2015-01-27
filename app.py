@@ -181,11 +181,18 @@ def ArtistPage():
     url = request.url
     url = url.split("?")
     artist = url[1]
-    music = find_links(artist)
-    if music == None:
+    songs = get_by_artist(artist)
+    '''if music == None:
         error = "Artist not found"
-        return render_template("ArtistPage.html", error = error)
-    return render_template("ArtistPage.html", artist = artist, music=music)
+        return render_template("ArtistPage.html", error = error)'''
+    j = 1
+    out = []
+    for song in songs["uploads"]:
+            song =list(song)
+            song[7] = j
+            j = j + 1
+            out.append(song)
+    return render_template("ArtistPage.html", artist = artist, songs=out)
 
 
 

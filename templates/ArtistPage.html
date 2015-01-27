@@ -1,19 +1,67 @@
 {% extends "base.html" %}
 <html>
+<head>
+{% block headcontent%}
+ <link rel="stylesheet" href="/static/main.css" type="text/css" media="screen">
+ <link rel="stylesheet" href="/static/speakker.css"  type="text/css" media="screen">
+ <link rel="stylesheet" href="/static/mspeakker.css" type="text/css" media="screen">
+ <script type="text/javascript" src="/static/jquery.min.js"></script>
+ <script type="text/javascript" src="/static/projekktor.min.js"></script>
+ <script type="text/javascript" src="/static/speakker.min.js"></script>
+{% endblock headcontent %}
+</head>
     {% block bodycontent %}
-    {{Error}}
+    <h1>{{artist}}</h1>
+     <div class="small_player" style='display:none'></div>
+  
+  
+  	<script type='text/javascript'>
 
-    <h1> {{artist}} </h1>
 
-    {% for song in music %}
-	{{song}}    
+  function makeMusic(element){
+    click=$(element).text()
+    click = click.split(',')
+    song = click[0]
+    artist = click[1].substring(5)
+    $('.small_player').show()
+    $('#space').show()
+    $(".small_player").speakker({
+      file: '/genres/songs/'+artist+'/'+song+'.mp3',
+      poster: '',
+      title: song + ' by ' + artist,
+      theme: 'dark'
+      });
+};
+</script> 
+  {% for song in songs %}
+  
+<div onclick='makeMusic(this)'>{{ song[1] }}, by  {{ song[2] }}, </div>
 
+<script type="text/javascript">
+  $(function() {
+    $("#submitBtn{{song[7]}}").click(function() {
+         $.ajax({
+            type: "GET",
+            url: $SCRIPT_ROOT + "/echo/",
+            contentType: "application/json; charset=utf-8",
+            data: { views: $('div[name="{{song[7]}}views"]').html(), title: "{{song[1]}}" , author: "{{song[2]}}" },
+            success: function(data) {
+                $("#Likes{{song[7]}}").text(data.value);
+            
+}
 
+        });     
+    });
+  });
+</script>
+<button type="button" id="submitBtn{{song[7]}}"  name="submitBtn" >Like</button>
+<strong>Likes:<div name="{{song[7]}}views" id="Likes{{song[7]}}">{{song[6]}}</div></strong>
+<br><br>
     {% endfor %}
     
     
     
-    
+ 
     
     
     {% endblock bodycontent%}
