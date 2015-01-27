@@ -37,7 +37,7 @@ def generate_link(title, author):
         os.makedirs(author)
     os.chdir("..")
     os.chdir("..")
-    return "./genres/songs/" + author + "/" + title
+    return "./genres/songs/" + author + "/" + title + ".mp3"
 
 
 def store_song(link, song_file):
