@@ -146,8 +146,8 @@ def upload():
 @app.route("/genres/<genre>")
 def genre(genre = None):
     global genres
-    #if "name" not in session:
-    #    return redirect("/")
+    if "name" not in session:
+        return redirect("/")
     if genre != None and genre in genres:
         print genre
         songs = get_by_genre(genre)
