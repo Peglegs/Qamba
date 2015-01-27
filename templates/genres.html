@@ -48,11 +48,11 @@
 </script> 
   {% for song in songs %}
   
-<div onclick='makeMusic(this)'>{{ song[1] }}, by  {{ song[2] }}, Views: {{ song[5] }}</div>
+<div onclick='makeMusic(this)'>{{ song[1] }}, by  {{ song[2] }}, </div>
 
 <script type="text/javascript">
   $(function() {
-    $("#submitBtn").click(function() {
+    $("#submitBtn{{song[7]}}").click(function() {
          $.ajax({
             type: "GET",
             url: $SCRIPT_ROOT + "/echo/",
@@ -67,7 +67,7 @@
     });
   });
 </script>
-<button type="button" id="submitBtn"  name="submitBtn" >Like</button>
+<button type="button" id="submitBtn{{song[7]}}"  name="submitBtn" >Like</button>
 <strong>Likes:<div name="{{song[7]}}views" id="Likes{{song[7]}}">{{song[6]}}</div></strong>
 <br><br>
 {% endfor %}
