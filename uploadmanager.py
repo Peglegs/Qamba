@@ -31,9 +31,11 @@ def special_upload(title,author,link,genre):
     conn.commit()
     conn.close()
 def generate_link(title, author):
-    os.chdir("./genres/songs")
+    os.chdir("./genres")
+    os.chdir("./songs")
     if not os.path.exists(author):
         os.makedirs(author)
+    os.chdir("..")
     os.chdir("..")
     return "./genres/songs/" + author + "/" + title
 
