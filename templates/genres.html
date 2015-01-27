@@ -20,21 +20,36 @@
 <body>
 {% block bodycontent %}
   <h1> {{ genre }} </h1>
-  <div class="small_player"></div>
+  <div class="small_player" style='display:none'></div>
+  <br id='space' style='display:none'>
+  <br id='space' style='display:none'>
+  <br id='space' style='display:none'>
+  <br id='space' style='display:none'>
+  <br id='space' style='display:none'>
+  
+  
   <script type='text/javascript'>
-  $(document).ready(function() {
-      $(".small_player").speakker({
-        file: 'songs/Mark Norwich/Mark.mp3',
-        poster: '',
-        title: 'hello',
-        theme: 'dark'
+
+
+  function makeMusic(element){
+    click=$(element).text()
+    click = click.split(',')
+    song = click[0]
+    artist = click[1].substring(5)
+    $('.small_player').show()
+    $('#space').show()
+    $(".small_player").speakker({
+      file: '/genres/songs/'+artist+'/'+song,
+      poster: '',
+      title: song + ' by ' + artist,
+      theme: 'dark'
       });
-});
+};
 </script> 
-<br><br><br><br><br><br><br><br>
   {% for song in songs %}
   
-{{ song[1] }} by  {{ song[2] }} Views: {{ song[5] }}
+<div onclick='makeMusic(this)'>{{ song[1] }}, by  {{ song[2] }}, Views: {{ song[5] }}</div>
+
 <script type="text/javascript">
   $(function() {
     $("#submitBtn").click(function() {
@@ -52,10 +67,13 @@
     });
   });
 </script>
-<br><br>
 <button type="button" id="submitBtn"  name="submitBtn" >Like</button>
 <strong>Likes:<div name="{{song[7]}}views" id="Likes{{song[7]}}">{{song[6]}}</div></strong>
+<br><br>
 {% endfor %}
+
+
+
 {% endblock bodycontent %}
 </body>
 </html>

@@ -105,6 +105,7 @@ def logout():
 def test():
     views = "2"
     return render_template("test.html", views=views)
+    
 @app.route('/echo/', methods=['GET'])
 def increment():
     link = "" + request.args.get("title") + request.args.get("author")
